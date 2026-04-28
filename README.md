@@ -8,7 +8,7 @@ A modern, animated multi-page portfolio website for **PFEC Global**, a study abr
 
 | Page | File | Description |
 |------|------|-------------|
-| Home | `pfec-global-enhanced.html` | Landing page with hero, services, destinations, stats, steps, awards, and offices |
+| Home | `index.html` | Landing page with hero, services, destinations, stats, steps, awards, and offices |
 | About | `about.html` | Company story, timeline, mission/vision, core values, leadership, global presence, testimonials |
 
 ---
@@ -39,15 +39,17 @@ A modern, animated multi-page portfolio website for **PFEC Global**, a study abr
 
 ```
 pefc-portfolio/
-├── pfec-global-enhanced.html   # Home page
+├── index.html   # Home page
 ├── about.html                  # About page
-├── styles.css                  # Stylesheet (shared by home page)
-├── script.js                   # JavaScript (shared by home page)
+├── css/
+│   ├── styles.css              # Stylesheet (home page)
+│   └── about.css               # Stylesheet (about page)
+├── js/
+│   ├── script.js               # JavaScript (home page)
+│   └── about.js                # JavaScript (about page)
 ├── README.md                   # This file
 └── LICENSE                     # Custom license
 ```
-
-> **Note:** `about.html` currently uses inline `<style>` and `<script>` tags for page-specific styles and logic. The home page (`pfec-global-enhanced.html`) uses external `styles.css` and `script.js`.
 
 ---
 
@@ -66,7 +68,7 @@ pefc-portfolio/
    ```bash
    git clone https://github.com/animeshkarmitun/PEFC.git
    ```
-2. Open `pfec-global-enhanced.html` in your browser.
+2. Open `index.html` in your browser.
 
 No installation or build step required.
 
