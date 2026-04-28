@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Free Consultation — PFEC Global</title>
+<link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Header -->
+<header id="header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">PFEC</div>
+      <div>PFEC GLOBAL<br><span>Study Abroad | Visa</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="about.html">About us</a>
+      <a href="index.html#destinations">Destination</a>
+      <a href="index.html#services">Our Services</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="#">Scholarships</a>
+      <a href="contact.html" style="color:var(--red);">Contact us</a>
+      <button class="btn-primary magnetic">Register Now</button>
+    </nav>
+    <div class="mobile-menu">☰</div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="page-hero" id="hero">
+  <div class="hero-bg-img" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> <span>/</span> <a href="about.html">About</a> <span>/</span> <span style="color:#fff;">Contact</span>
+    </div>
+    <h1>Book Your Free Consultation</h1>
+    <p>Talk to our experts. No fees, no obligations — just honest guidance on your study-abroad journey.</p>
+  </div>
+</section>
+
+<!-- Contact Form + Info -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2>We're Here to Help</h2>
+      <p>Fill out the form below and our team will reach out within 24 hours to schedule your free consultation.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form reveal-left">
+        <form id="consultForm" onsubmit="return handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name <span class="required">*</span></label>
+              <input type="text" name="firstName" placeholder="e.g. Rafiq" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name <span class="required">*</span></label>
+              <input type="text" name="lastName" placeholder="e.g. Hossain" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email <span class="required">*</span></label>
+              <input type="email" name="email" placeholder="you@email.com" required>
+            </div>
+            <div class="form-group">
+              <label>Phone <span class="required">*</span></label>
+              <input type="tel" name="phone" placeholder="+880 1XXX-XXXXXX" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Destination</label>
+              <select name="destination">
+                <option value="">Select a country</option>
+                <option value="au">🇦🇺 Australia</option>
+                <option value="uk">🇬🇧 UK</option>
+                <option value="ca">🇨🇦 Canada</option>
+                <option value="us">🇺🇸 USA</option>
+                <option value="nz">🇳🇿 New Zealand</option>
+                <option value="my">🇲🇾 Malaysia</option>
+                <option value="jp">🇯🇵 Japan</option>
+                <option value="ae">🇦🇪 Dubai</option>
+                <option value="ie">🇮🇪 Ireland</option>
+                <option value="de">🇩🇪 Germany</option>
+                <option value="other">Other / Undecided</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Service Needed</label>
+              <select name="service">
+                <option value="">Select a service</option>
+                <option value="admission">Admission Support</option>
+                <option value="visa">Visa Services</option>
+                <option value="scholarship">Scholarship Guidance</option>
+                <option value="insurance">Health Insurance</option>
+                <option value="accommodation">Student Accommodation</option>
+                <option value="full">Full Package (End-to-End)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nearest Office</label>
+            <select name="office">
+              <option value="">Select preferred office</option>
+              <option value="dhanmondi">Dhanmondi, Dhaka</option>
+              <option value="banani">Banani, Dhaka</option>
+              <option value="uttara">Uttara, Dhaka</option>
+              <option value="chattogram">Chattogram</option>
+              <option value="online">Online / Video Call</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message (Optional)</label>
+            <textarea name="message" placeholder="Tell us about your study goals, preferred course, or any questions you have..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit magnetic">Book My Free Consultation</button>
+          <p class="form-note">By submitting, you agree to our <a href="#">Privacy Policy</a>. We never share your data.</p>
+        </form>
+        <div id="formSuccess" style="display:none; text-align:center; padding:40px 20px;">
+          <div style="font-size:64px; margin-bottom:16px;">🎉</div>
+          <h3 style="font-size:22px; color:var(--navy-light); margin-bottom:8px;">Thank You!</h3>
+          <p style="color:var(--text-light); line-height:1.6;">We've received your request. A PFEC counsellor will call you within <strong>24 hours</strong> to confirm your appointment.</p>
+          <button class="btn-primary" style="margin-top:20px;" onclick="resetForm()">Book Another</button>
+        </div>
+      </div>
+      <div class="contact-info reveal-right">
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <h4>Call Us Directly</h4>
+          <p>Speak to a counsellor now. Lines open Sat–Thu, 9AM–7PM.</p>
+          <a href="tel:+8809609800300">+880 9609 80 03 00</a>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">✉️</div>
+          <h4>Email Us</h4>
+          <p>For detailed queries or document submissions.</p>
+          <a href="mailto:info@pfecglobal.com.bd">info@pfecglobal.com.bd</a>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">💬</div>
+          <h4>WhatsApp</h4>
+          <p>Quick questions? Message us anytime.</p>
+          <a href="https://wa.me/8809609800300">+880 9609 80 03 00</a>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🕐</div>
+          <h4>Working Hours</h4>
+          <p>Saturday – Thursday: 9:00 AM – 7:00 PM<br>Friday: Closed</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Offices -->
+<section class="section offices-section" id="offices">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Visit Us</div>
+      <h2>Our Offices in Bangladesh</h2>
+      <p>Walk into any of our four locations for a face-to-face consultation. No appointment needed for initial enquiries.</p>
+    </div>
+    <div class="offices-grid stagger-children">
+      <div class="office-card reveal">
+        <span class="office-flag">🏢</span>
+        <h4>Dhanmondi</h4>
+        <p>SIMA Blossom (5th Floor), Plot 390, Road-27, Dhaka 1209</p>
+        <div class="phone">📞 +880 9609 80 03 00</div>
+        <div class="hours">Open Sat–Thu, 9AM–7PM</div>
+      </div>
+      <div class="office-card reveal">
+        <span class="office-flag">🏢</span>
+        <h4>Banani</h4>
+        <p>RSR Tower (7th Floor), House 50, Block C, Rd 11, Dhaka 1213</p>
+        <div class="phone">📞 +880 9609 80 07 00</div>
+        <div class="hours">Open Sat–Thu, 9AM–7PM</div>
+      </div>
+      <div class="office-card reveal">
+        <span class="office-flag">🏢</span>
+        <h4>Uttara</h4>
+        <p>Level 6, RM Plaza, 20 Sonargaon Janapath, Sector 11, Dhaka 1230</p>
+        <div class="phone">📞 +880 9609 80 05 00</div>
+        <div class="hours">Open Sat–Thu, 9AM–7PM</div>
+      </div>
+      <div class="office-card reveal">
+        <span class="office-flag">🏢</span>
+        <h4>Chattogram</h4>
+        <p>5th Floor, Equity Centrium, O R Nizam Road, CEC Circle</p>
+        <div class="phone">📞 +880 9609 80 04 00</div>
+        <div class="hours">Open Sat–Thu, 9AM–7PM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Common Questions</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list stagger-children">
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Is the consultation really free?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes — absolutely. Your first consultation with a PFEC counsellor is 100% free with no hidden charges or obligations. We believe every student deserves access to expert guidance before making any financial commitment.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>How long does the entire process take?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>From first consultation to university admission, the process typically takes 3–6 months. Visa processing adds another 4–12 weeks depending on the destination country. We provide a personalised timeline during your first meeting.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Do I need to visit an office, or can we do everything online?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Both options work. Many students complete the entire process via video calls and document uploads. However, we recommend at least one in-person visit for visa document verification and biometric guidance.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>What documents do I need for the first meeting?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Just your academic transcripts (SSC/HSC or equivalent) and a valid passport if you have one. Don't worry if documents are incomplete — we'll create a checklist tailored to your target universities.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Do you guarantee visa approval?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>No consultancy can legally guarantee a visa. However, our 96.7% visa grant rate speaks for itself. We pre-assess every application against embassy criteria and only submit when we're confident. If there are red flags, we tell you honestly.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Can you help with scholarships?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes — scholarship guidance is one of our core services. We maintain a database of 200+ active scholarships across our partner universities and help you craft compelling applications. Many of our students secure partial or full funding.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<section class="trust-bar">
+  <div class="trust-bar-grid">
+    <div class="trust-bar-item">
+      <h4>24h</h4>
+      <p>Response Time</p>
+    </div>
+    <div class="trust-bar-item">
+      <h4>22,000+</h4>
+      <p>Students Helped</p>
+    </div>
+    <div class="trust-bar-item">
+      <h4>96.7%</h4>
+      <p>Visa Success</p>
+    </div>
+    <div class="trust-bar-item">
+      <h4>4</h4>
+      <p>Offices in BD</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box reveal">
+    <h3>Not Ready to Book Yet?</h3>
+    <p>Explore our destinations, services, and success stories first. When you're ready, we'll be here.</p>
+    <a href="index.html#destinations" class="btn-primary magnetic">Explore Destinations</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-main">
+  <div class="footer-grid">
+    <div class="footer-brand reveal">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">PFEC</div>
+        <div>PFEC GLOBAL<br><span>Study Abroad | Visa</span></div>
+      </a>
+      <p>Since 2006, PFEC Global has been guiding students toward a better life abroad through expert higher education consultancy and end-to-end support.</p>
+      <div class="social-links">
+        <a href="#"><span>f</span></a>
+        <a href="#"><span>📷</span></a>
+        <a href="#"><span>in</span></a>
+        <a href="#"><span>▶</span></a>
+      </div>
+    </div>
+    <div class="footer-col reveal">
+      <h4>Student Services</h4>
+      <ul>
+        <li><a href="index.html#services">Admission Support</a></li>
+        <li><a href="index.html#services">Visa Services</a></li>
+        <li><a href="index.html#services">Health Insurance</a></li>
+        <li><a href="index.html#services">Student Accommodation</a></li>
+      </ul>
+      <h4 style="margin-top:28px;">Scholarships</h4>
+      <ul>
+        <li><a href="#">Australia Scholarships</a></li>
+        <li><a href="#">UK Scholarships</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal">
+      <h4>Study Destinations</h4>
+      <ul>
+        <li><a href="index.html#destinations">Australia</a></li>
+        <li><a href="index.html#destinations">UK</a></li>
+        <li><a href="index.html#destinations">Canada</a></li>
+        <li><a href="index.html#destinations">Malaysia</a></li>
+        <li><a href="index.html#destinations">USA</a></li>
+        <li><a href="index.html#destinations">Japan</a></li>
+        <li><a href="index.html#destinations">Europe</a></li>
+        <li><a href="index.html#destinations">Dubai</a></li>
+        <li><a href="index.html#destinations">New Zealand</a></li>
+        <li><a href="index.html#destinations">Ireland</a></li>
+        <li><a href="index.html#destinations">Indonesia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal">
+      <h4>Courses</h4>
+      <ul>
+        <li><a href="#">Nursing</a></li>
+        <li><a href="#">Accounting</a></li>
+        <li><a href="#">Engineering</a></li>
+        <li><a href="#">Business Studies</a></li>
+        <li><a href="#">Food & Hospitality</a></li>
+      </ul>
+      <h4 style="margin-top:28px;">Resources</h4>
+      <ul>
+        <li><a href="index.html#resources">Blogs</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal">
+      <h4>About PFEC Global</h4>
+      <ul>
+        <li><a href="about.html">About PFEC Bangladesh</a></li>
+        <li><a href="about.html#team">Our Leadership</a></li>
+        <li><a href="about.html#awards">Awards & Achievements</a></li>
+        <li><a href="about.html#testimonials">Testimonials</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- Bottom Bar -->
+<div class="bottom-bar">
+  <p><a href="#">Bangladesh</a> | <a href="#">Australia</a> | <a href="#">Sri Lanka</a> | <a href="#">India</a></p>
+  <p style="margin-top:10px;">Copyright © 2026 PFEC. | <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a></p>
+</div>
+
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script src="js/contact.js"></script>
+</body>
+</html>

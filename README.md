@@ -10,6 +10,7 @@ A modern, animated multi-page portfolio website for **PFEC Global**, a study abr
 |------|------|-------------|
 | Home | `index.html` | Landing page with hero, services, destinations, stats, steps, awards, and offices |
 | About | `about.html` | Company story, timeline, mission/vision, core values, leadership, global presence, testimonials |
+| Contact | `contact.html` | Contact form, office locations, FAQ accordion, trust stats |
 
 ---
 
@@ -41,12 +42,15 @@ A modern, animated multi-page portfolio website for **PFEC Global**, a study abr
 pefc-portfolio/
 ├── index.html   # Home page
 ├── about.html                  # About page
+├── contact.html                # Contact page
 ├── css/
 │   ├── styles.css              # Stylesheet (home page)
-│   └── about.css               # Stylesheet (about page)
+│   ├── about.css               # Stylesheet (about page)
+│   └── contact.css             # Stylesheet (contact page)
 ├── js/
 │   ├── script.js               # JavaScript (home page)
-│   └── about.js                # JavaScript (about page)
+│   ├── about.js                # JavaScript (about page)
+│   └── contact.js              # JavaScript (contact page)
 ├── README.md                   # This file
 └── LICENSE                     # Custom license
 ```
