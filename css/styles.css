@@ -84,16 +84,8 @@ header.scrolled .nav-container { padding: 10px 24px; }
   font-weight: 800; font-size: 18px; color: var(--navy-light);
   letter-spacing: -0.5px;
 }
-.logo-icon {
-  width: 40px; height: 40px;
-  background: linear-gradient(135deg, var(--navy-light), #3949ab);
-  border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  color: #fff; font-weight: 900; font-size: 13px;
-  box-shadow: 0 4px 15px rgba(26,35,126,0.3);
-  transition: transform 0.3s var(--transition);
-}
-.logo:hover .logo-icon { transform: rotate(5deg) scale(1.05); }
-.logo span { color: var(--red); font-weight: 600; font-size: 11px; display: block; margin-top: -3px; letter-spacing: 0.5px; }
+.logo img { transition: transform 0.3s var(--transition); }
+.logo:hover img { transform: rotate(5deg) scale(1.05); }
 .nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-links a {
   font-size: 14px; font-weight: 500; color: #444;

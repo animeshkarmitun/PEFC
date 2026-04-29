@@ -1,6 +1,6 @@
-# PFEC Global — Portfolio Website
+# European International — Portfolio Website
 
-A modern, animated multi-page portfolio website for **PFEC Global**, a study abroad and visa consultancy firm based in Bangladesh. Built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies.
+A modern, animated multi-page portfolio website for **European International**, a study abroad and visa consultancy firm based in Bangladesh. Built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies.
 
 ---
 
