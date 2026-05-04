@@ -134,19 +134,70 @@ document.querySelectorAll('.blur-load img').forEach(img => {
   }
 });
 
-/* ─── STEPS CURVE DRAW ─── */
-const stepsCurve = document.getElementById('stepsCurve');
-if (stepsCurve) {
-  const curveObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        curveObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  curveObserver.observe(stepsCurve);
+
+/* ─── DESTINATIONS CAROUSEL ─── */
+const destScroll = document.getElementById('destScroll');
+const destPrev = document.getElementById('destPrev');
+const destNext = document.getElementById('destNext');
+const destDots = document.querySelectorAll('#destinations .dot');
+let destAutoScroll;
+
+function scrollDest(dir) {
+  const cardWidth = destScroll.querySelector('.dest-card').offsetWidth + 24;
+  destScroll.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
 }
+
+destPrev.addEventListener('click', () => {
+  scrollDest(-1);
+  resetDestAuto();
+});
+
+destNext.addEventListener('click', () => {
+  const isEnd = destScroll.scrollLeft + destScroll.offsetWidth >= destScroll.scrollWidth - 10;
+  if (isEnd) destScroll.scrollTo({ left: 0, behavior: 'smooth' });
+  else scrollDest(1);
+  resetDestAuto();
+});
+
+function startDestAuto() {
+  destAutoScroll = setInterval(() => {
+    const isEnd = destScroll.scrollLeft + destScroll.offsetWidth >= destScroll.scrollWidth - 10;
+    if (isEnd) destScroll.scrollTo({ left: 0, behavior: 'smooth' });
+    else scrollDest(1);
+  }, 4000);
+}
+
+function resetDestAuto() {
+  clearInterval(destAutoScroll);
+  startDestAuto();
+}
+
+destScroll.addEventListener('mouseenter', () => clearInterval(destAutoScroll));
+destScroll.addEventListener('mouseleave', () => startDestAuto());
+
+// Sync Dots with Scroll
+destScroll.addEventListener('scroll', () => {
+  const cardWidth = destScroll.querySelector('.dest-card').offsetWidth + 24;
+  const index = Math.round(destScroll.scrollLeft / cardWidth);
+  destDots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index % destDots.length);
+  });
+});
+
+destDots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    const cardWidth = destScroll.querySelector('.dest-card').offsetWidth + 24;
+    destScroll.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+    resetDestAuto();
+  });
+});
+
+// Start auto-scroll when section is visible
+const destObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) startDestAuto();
+  else clearInterval(destAutoScroll);
+}, { threshold: 0.2 });
+destObserver.observe(destScroll);
 
 /* ─── AWARDS SLIDER ─── */
 const awardsSlider = document.getElementById('awardsSlider');
@@ -185,5 +236,15 @@ document.querySelectorAll('.dot').forEach((dot, i) => {
   dot.addEventListener('click', () => {
     document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
     dot.classList.add('active');
+  });
+});
+
+// FAQ Accordion Toggle
+document.querySelectorAll('.faq-item').forEach(item => {
+  const question = item.querySelector('.faq-question');
+  question.addEventListener('click', () => {
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(otherItem => otherItem.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
   });
 });
