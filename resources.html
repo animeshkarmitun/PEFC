@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources & Blog — European International</title>
+<style>
+/* ─── BASE ─── */
+:root {
+  --navy: #0d1b3e; --navy-light: #1a237e; --red: #e53935; --red-dark: #c62828;
+  --cream: #f8f9fa; --text: #1e293b; --text-light: #64748b; --white: #ffffff;
+  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text); line-height: 1.6; overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ─── SCROLL PROGRESS ─── */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--navy-light));
+  z-index: 10001; width: 0%; transition: width 0.1s linear;
+}
+
+/* ─── HEADER ─── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.9); backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(0,0,0,0.05); transition: all 0.4s var(--transition);
+}
+header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+.nav-container {
+  max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; transition: padding 0.3s var(--transition);
+}
+header.scrolled .nav-container { padding: 10px 24px; }
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 18px; color: var(--navy-light); letter-spacing: -0.5px;
+}
+.logo-icon {
+  width: 40px; height: 40px; background: linear-gradient(135deg, var(--navy-light), #3949ab);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 900; font-size: 13px;
+  box-shadow: 0 4px 15px rgba(26,35,126,0.3); transition: transform 0.3s var(--transition);
+}
+.logo:hover .logo-icon { transform: rotate(5deg) scale(1.05); }
+.logo span { color: var(--red); font-weight: 600; font-size: 11px; display: block; margin-top: -3px; letter-spacing: 0.5px; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: #444; position: relative; padding: 4px 0; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+  background: var(--red); border-radius: 2px; transition: width 0.3s var(--transition);
+}
+.nav-links a:hover { color: var(--red); }
+.nav-links a:hover::after { width: 100%; }
+.dropdown::after { content: "▾"; font-size: 9px; margin-left: 5px; color: #888; display: inline-block; transition: transform 0.3s; }
+.dropdown:hover::after { transform: rotate(180deg); color: var(--red); }
+.btn-primary {
+  background: var(--red); color: #fff; padding: 12px 28px; border-radius: 8px;
+  font-weight: 600; font-size: 14px; border: none; cursor: pointer; position: relative; overflow: hidden;
+  transition: transform 0.3s var(--transition), box-shadow 0.3s;
+  box-shadow: 0 4px 20px rgba(229,57,53,0.3);
+}
+.btn-primary::before {
+  content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+  background: rgba(255,255,255,0.2); border-radius: 50%; transform: translate(-50%,-50%);
+  transition: width 0.6s, height 0.6s;
+}
+.btn-primary:hover::before { width: 300px; height: 300px; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(229,57,53,0.4); }
+.mobile-menu { display: none; font-size: 24px; cursor: pointer; }
+
+/* ─── HERO ─── */
+.page-hero {
+  min-height: 420px; position: relative; overflow: hidden;
+  display: flex; align-items: center; color: #fff;
+  background: linear-gradient(135deg, #0a1128 0%, #1a237e 100%);
+}
+.hero-bg-img {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1920&q=80') center/cover no-repeat;
+  will-change: transform;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(7,13,31,0.92) 0%, rgba(13,27,62,0.85) 50%, rgba(26,35,126,0.75) 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+.hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 120px 24px 60px; width: 100%; }
+.breadcrumb {
+  display: flex; align-items: center; gap: 10px; font-size: 13px; color: #94a3b8; margin-bottom: 24px;
+  opacity: 0; transform: translateY(10px); animation: fadeUp 0.6s var(--transition) 0.2s forwards;
+}
+.breadcrumb a { color: #cbd5e1; transition: color 0.3s; }
+.breadcrumb a:hover { color: var(--red); }
+.page-hero h1 {
+  font-size: clamp(36px, 5.5vw, 56px); font-weight: 800; margin-bottom: 20px;
+  line-height: 1.1; letter-spacing: -1.5px; max-width: 650px;
+  opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s var(--transition) 0.4s forwards;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.page-hero p {
+  font-size: 18px; color: #cbd5e1; max-width: 540px; line-height: 1.7;
+  opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s var(--transition) 0.6s forwards;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.2);
+}
+
+/* ─── REVEAL UTILITIES ─── */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s var(--transition), transform 0.6s var(--transition); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-scale { opacity: 0; transform: scale(0.95); transition: all 0.6s var(--transition); }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+.stagger-children > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-children > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-children > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-children > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-children > *:nth-child(5) { transition-delay: 320ms; }
+.stagger-children > *:nth-child(6) { transition-delay: 400ms; }
+
+/* ─── SECTIONS ─── */
+.section { padding: 70px 24px; position: relative; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 36px; }
+.section-header h2 {
+  font-size: clamp(26px, 3.5vw, 36px); color: var(--navy-light);
+  margin-bottom: 16px; font-weight: 800; letter-spacing: -0.5px;
+}
+.section-header p { color: var(--text-light); font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+.section-label {
+  display: inline-block; font-size: 12px; font-weight: 700; color: var(--red);
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px;
+}
+
+/* ─── FILTER BAR ─── */
+.filter-wrapper {
+  position: sticky; top: 70px; z-index: 100;
+  background: #f8fafc; padding: 20px 0; margin-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.filter-bar {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+}
+.filter-btn {
+  padding: 10px 22px; border-radius: 30px; border: 1.5px solid #e2e8f0;
+  background: var(--white); font-size: 13px; font-weight: 600; color: var(--text-light);
+  cursor: pointer; transition: all 0.3s var(--transition);
+}
+.filter-btn:hover { border-color: var(--navy-light); color: var(--navy-light); transform: translateY(-2px); }
+.filter-btn.active { background: var(--navy-light); color: #fff; border-color: var(--navy-light); box-shadow: 0 4px 15px rgba(26,35,126,0.3); }
+
+/* ─── FEATURED ARTICLE ─── */
+.featured-section { background: var(--white); }
+.featured-card {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+  background: var(--white); border-radius: 24px; overflow: hidden;
+  border: 1px solid #e2e8f0; box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  transition: all 0.4s var(--transition);
+}
+.featured-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+.featured-img {
+  height: 100%; min-height: 360px; position: relative; overflow: hidden;
+}
+.featured-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s var(--transition);
+}
+.featured-card:hover .featured-img img { transform: scale(1.05); }
+.featured-content { padding: 40px 36px 40px 0; }
+.featured-tag {
+  display: inline-block; font-size: 11px; font-weight: 700; color: var(--red);
+  background: #fef2f2; padding: 4px 12px; border-radius: 20px;
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px;
+}
+.featured-content h3 {
+  font-size: 28px; font-weight: 800; color: var(--navy-light); margin-bottom: 14px;
+  line-height: 1.2; letter-spacing: -0.5px;
+}
+.featured-content > p { font-size: 15px; color: var(--text-light); line-height: 1.7; margin-bottom: 20px; }
+.featured-meta {
+  display: flex; gap: 16px; margin-bottom: 20px; font-size: 13px; color: var(--text-light);
+}
+.featured-meta span { display: flex; align-items: center; gap: 6px; }
+.featured-cta {
+  font-size: 15px; font-weight: 700; color: var(--red); display: inline-flex; align-items: center; gap: 8px;
+  transition: gap 0.3s;
+}
+.featured-cta:hover { gap: 12px; }
+
+/* ─── ARTICLES GRID ─── */
+.articles-section { background: #f8fafc; }
+.articles-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.article-card {
+  background: var(--white); border-radius: 16px; overflow: hidden;
+  border: 1px solid #e2e8f0; transition: all 0.4s var(--transition);
+}
+.article-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+.article-card.hidden { display: none; }
+.article-img {
+  height: 180px; position: relative; overflow: hidden;
+}
+.article-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s var(--transition);
+}
+.article-card:hover .article-img img { transform: scale(1.08); }
+.article-tag {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(255,255,255,0.95); padding: 4px 12px;
+  border-radius: 20px; font-size: 11px; font-weight: 700; color: var(--navy-light);
+  z-index: 2;
+}
+.article-body { padding: 22px; }
+.article-body h4 { font-size: 17px; font-weight: 700; color: var(--navy-light); margin-bottom: 8px; line-height: 1.3; }
+.article-body > p { font-size: 13px; color: var(--text-light); line-height: 1.6; margin-bottom: 14px; }
+.article-meta {
+  display: flex; gap: 12px; font-size: 12px; color: #94a3b8;
+}
+.article-meta span { display: flex; align-items: center; gap: 4px; }
+
+/* Empty state */
+.empty-state {
+  text-align: center; padding: 80px 24px; display: none;
+}
+.empty-state.show { display: block; }
+.empty-state-icon { font-size: 64px; margin-bottom: 20px; }
+.empty-state h3 { font-size: 22px; color: var(--navy-light); margin-bottom: 8px; }
+.empty-state p { color: var(--text-light); margin-bottom: 20px; }
+
+/* ─── GUIDES ─── */
+.guides-section { background: var(--white); }
+.guides-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.guide-card {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 16px;
+  padding: 28px 24px; border: 1px solid #e2e8f0; text-align: center;
+  transition: all 0.4s var(--transition);
+}
+.guide-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); border-color: #cbd5e1; }
+.guide-icon { font-size: 36px; margin-bottom: 14px; display: block; }
+.guide-card h4 { font-size: 16px; font-weight: 700; color: var(--navy-light); margin-bottom: 6px; }
+.guide-card p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+
+/* ─── NEWSLETTER ─── */
+.newsletter-section {
+  background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
+  padding: 70px 24px; position: relative; overflow: hidden;
+}
+.newsletter-section::before {
+  content: ''; position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(229,57,53,0.15), transparent 70%);
+}
+.newsletter-box {
+  max-width: 600px; margin: 0 auto; text-align: center; position: relative; z-index: 2;
+}
+.newsletter-box h2 { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; color: #fff; margin-bottom: 12px; }
+.newsletter-box p { font-size: 16px; color: #a0a8d0; margin-bottom: 28px; }
+.newsletter-form {
+  display: flex; gap: 12px; max-width: 480px; margin: 0 auto;
+}
+.newsletter-form input {
+  flex: 1; padding: 14px 20px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1); color: #fff; font-size: 15px; font-family: inherit;
+  outline: none; transition: all 0.3s;
+}
+.newsletter-form input::placeholder { color: #94a3b8; }
+.newsletter-form input:focus { border-color: var(--red); background: rgba(255,255,255,0.15); }
+.newsletter-form button { padding: 14px 28px; font-size: 15px; white-space: nowrap; }
+
+/* ─── CTA ─── */
+.cta-section {
+  background: #f8fafc; padding: 70px 24px; text-align: center;
+}
+.cta-box {
+  max-width: 700px; margin: 0 auto; padding: 48px 40px;
+  background: var(--white); border-radius: 24px; border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.cta-box h3 { font-size: 28px; font-weight: 800; color: var(--navy-light); margin-bottom: 12px; }
+.cta-box p { font-size: 16px; color: var(--text-light); margin-bottom: 24px; }
+
+/* ─── FOOTER ─── */
+.footer-main { background: #f5f7fa; padding: 60px 24px 30px; position: relative; }
+.footer-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px;
+}
+.footer-brand .logo { margin-bottom: 20px; }
+.footer-brand p { font-size: 14px; color: var(--text-light); line-height: 1.7; margin-bottom: 24px; }
+.social-links { display: flex; gap: 12px; }
+.social-links a {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--navy-light); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: all 0.3s var(--transition); position: relative; overflow: hidden;
+}
+.social-links a::before {
+  content: ''; position: absolute; inset: 0; background: var(--red); border-radius: 50%;
+  transform: scale(0); transition: transform 0.3s var(--transition);
+}
+.social-links a:hover::before { transform: scale(1); }
+.social-links a span { position: relative; z-index: 2; }
+.social-links a:hover { transform: translateY(-3px); }
+.footer-col h4 { font-size: 13px; font-weight: 800; color: var(--red); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a { font-size: 14px; color: #555; transition: all 0.2s; display: inline-block; }
+.footer-col ul li a:hover { color: var(--red); transform: translateX(4px); }
+
+/* ─── BOTTOM BAR ─── */
+.bottom-bar {
+  background: #070d1f; color: #5a6a8a; padding: 24px; text-align: center; font-size: 13px;
+}
+.bottom-bar a { color: #8a9ab8; margin: 0 10px; transition: color 0.3s; }
+.bottom-bar a:hover { color: #fff; }
+
+/* ─── SCROLL TO TOP ─── */
+.scroll-top {
+  position: fixed; bottom: 30px; right: 30px; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--navy-light); color: #fff; border: none; cursor: pointer; font-size: 22px;
+  display: flex; opacity: 0; pointer-events: none; align-items: center; justify-content: center;
+  box-shadow: 0 8px 30px rgba(13,27,62,0.4); z-index: 9998;
+  transition: all 0.4s var(--transition); transform: translateY(20px);
+}
+.scroll-top.show { opacity: 1; pointer-events: all; transform: translateY(0); }
+.scroll-top:hover { background: var(--red); transform: translateY(-4px); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 992px) {
+  .nav-links { display: none; }
+  .mobile-menu { display: block; }
+  .featured-card { grid-template-columns: 1fr; }
+  .featured-img { min-height: 240px; }
+  .featured-content { padding: 28px; }
+  .articles-grid { grid-template-columns: repeat(2, 1fr); }
+  .guides-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .newsletter-form { flex-direction: column; }
+  .page-hero { min-height: auto; }
+  .hero-content { padding: 100px 24px 40px; }
+  .section { padding: 50px 24px; }
+}
+@media (max-width: 576px) {
+  .articles-grid { grid-template-columns: 1fr; }
+  .guides-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .page-hero { min-height: auto; }
+  .hero-content { padding: 90px 20px 36px !important; }
+  .section { padding: 36px 20px; }
+  .section-header { margin-bottom: 24px; }
+  .section-header h2 { font-size: 22px; }
+  .featured-content h3 { font-size: 22px; }
+  .filter-bar { gap: 8px; }
+  .filter-btn { padding: 8px 16px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Header -->
+<header id="header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/europeanbdlogo.png" alt="European International" style="height: 45px;">
+    </a>
+    <nav class="nav-links">
+      <a href="about.html">About us</a>
+      <a href="destinations.html">Destination</a>
+      <a href="services.html">Our Services</a>
+      <a href="resources.html" style="color:var(--red);">Resources</a>
+      <a href="scholarships.html">Scholarships</a>
+      <a href="contact.html">Contact us</a>
+      <button class="btn-primary">Register Now</button>
+    </nav>
+    <div class="mobile-menu">☰</div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="page-hero" id="hero">
+  <div class="hero-bg-img" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> <span>/</span> <span style="color:#fff;">Resources & Blog</span>
+    </div>
+    <h1>Resources & Blog</h1>
+    <p>Study guides, visa tips, country comparisons, and success stories — everything you need to make an informed decision about studying abroad.</p>
+  </div>
+</section>
+
+<!-- Featured Article -->
+<section class="section featured-section" id="featured">
+  <div class="container">
+    <div class="featured-card reveal">
+      <div class="featured-img">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=500&fit=crop&q=80" alt="Featured" loading="lazy">
+      </div>
+      <div class="featured-content">
+        <span class="featured-tag">Featured</span>
+        <h3>The Complete Guide to Studying Abroad from Bangladesh in 2026</h3>
+        <p>Everything you need to know — from choosing a country and university to securing your visa and booking your flight. A step-by-step roadmap for Bangladeshi students.</p>
+        <div class="featured-meta">
+          <span>📅 May 2026</span>
+          <span>⏱ 12 min read</span>
+          <span>👁 8,400 views</span>
+        </div>
+        <a href="#" class="featured-cta">Read Full Guide →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Articles -->
+<section class="section articles-section" id="articles">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Latest Articles</div>
+      <h2>Study Tips, Visa Guides & Success Stories</h2>
+    </div>
+    <div class="filter-wrapper">
+      <div class="filter-bar reveal">
+        <button class="filter-btn active" data-filter="all" onclick="filterArticles('all', this)">All</button>
+        <button class="filter-btn" data-filter="guide" onclick="filterArticles('guide', this)">Study Guides</button>
+        <button class="filter-btn" data-filter="visa" onclick="filterArticles('visa', this)">Visa Tips</button>
+        <button class="filter-btn" data-filter="compare" onclick="filterArticles('compare', this)">Comparisons</button>
+        <button class="filter-btn" data-filter="story" onclick="filterArticles('story', this)">Success Stories</button>
+      </div>
+    </div>
+    <div class="empty-state" id="emptyState">
+      <div class="empty-state-icon">🔍</div>
+      <h3>No articles match this filter</h3>
+      <p>Try selecting "All" to see every resource.</p>
+      <button class="btn-primary" onclick="filterArticles('all', document.querySelector('[data-filter=all]'))">Show All</button>
+    </div>
+    <div class="articles-grid stagger-children" id="articlesGrid">
+      <div class="article-card reveal" data-category="guide">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&h=300&fit=crop&q=80" alt="Australia" loading="lazy">
+          <span class="article-tag">Study Guide</span>
+        </div>
+        <div class="article-body">
+          <h4>How to Choose the Right University in Australia</h4>
+          <p>QS rankings matter, but so do location, course structure, and graduate outcomes. Here's how to evaluate what actually counts.</p>
+          <div class="article-meta">
+            <span>📅 Apr 2026</span>
+            <span>⏱ 8 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="visa">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=300&fit=crop&q=80" alt="Visa" loading="lazy">
+          <span class="article-tag">Visa Tips</span>
+        </div>
+        <div class="article-body">
+          <h4>UK Student Visa: Document Checklist for Bangladeshi Applicants</h4>
+          <p>The most common reason for UK visa refusal is incomplete financial documentation. Here's the exact checklist our 96.7% success rate is built on.</p>
+          <div class="article-meta">
+            <span>📅 Apr 2026</span>
+            <span>⏱ 6 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="compare">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=600&h=300&fit=crop&q=80" alt="Canada" loading="lazy">
+          <span class="article-tag">Comparison</span>
+        </div>
+        <div class="article-body">
+          <h4>Canada vs Australia: Where Should You Go in 2026?</h4>
+          <p>Tuition, PR pathways, job markets, and quality of life — a data-driven breakdown of the two most popular destinations for Bangladeshi students.</p>
+          <div class="article-meta">
+            <span>📅 Mar 2026</span>
+            <span>⏱ 10 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="story">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=300&fit=crop&q=80" alt="Student" loading="lazy">
+          <span class="article-tag">Success Story</span>
+        </div>
+        <div class="article-body">
+          <h4>From Dhaka to Melbourne: A Medical Student's Journey</h4>
+          <p>How a student from Dhanmondi secured admission to study medicine at the University of Melbourne — and what they learned along the way.</p>
+          <div class="article-meta">
+            <span>📅 Mar 2026</span>
+            <span>⏱ 7 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="guide">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&h=300&fit=crop&q=80" alt="UK" loading="lazy">
+          <span class="article-tag">Study Guide</span>
+        </div>
+        <div class="article-body">
+          <h4>Writing a Winning Statement of Purpose (SOP)</h4>
+          <p>Admissions officers read 500+ SOPs per season. Here's how to write one that stands out — with real examples from students who got into Oxford and Cambridge.</p>
+          <div class="article-meta">
+            <span>📅 Feb 2026</span>
+            <span>⏱ 9 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="visa">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&h=300&fit=crop&q=80" alt="USA" loading="lazy">
+          <span class="article-tag">Visa Tips</span>
+        </div>
+        <div class="article-body">
+          <h4>US F-1 Visa Interview: Questions They Always Ask</h4>
+          <p>We analyzed 200+ visa interview transcripts to find the 15 questions US consular officers ask most often — and the answers that get you approved.</p>
+          <div class="article-meta">
+            <span>📅 Feb 2026</span>
+            <span>⏱ 5 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="compare">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1469521669194-babb45599def?w=600&h=300&fit=crop&q=80" alt="New Zealand" loading="lazy">
+          <span class="article-tag">Comparison</span>
+        </div>
+        <div class="article-body">
+          <h4>Malaysia vs Indonesia: Affordable Study in Asia</h4>
+          <p>Two of the most budget-friendly destinations for Bangladeshi students. We compare tuition, living costs, visa ease, and post-study work rights.</p>
+          <div class="article-meta">
+            <span>📅 Jan 2026</span>
+            <span>⏱ 8 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="story">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=300&fit=crop&q=80" alt="Japan" loading="lazy">
+          <span class="article-tag">Success Story</span>
+        </div>
+        <div class="article-body">
+          <h4>How One Student Won the MEXT Scholarship to Japan</h4>
+          <p>Zero Japanese language skills, limited budget, big dream. Here's how European International helped secure Japan's most prestigious government scholarship.</p>
+          <div class="article-meta">
+            <span>📅 Jan 2026</span>
+            <span>⏱ 6 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-card reveal" data-category="guide">
+        <div class="article-img">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=300&fit=crop&q=80" alt="Dubai" loading="lazy">
+          <span class="article-tag">Study Guide</span>
+        </div>
+        <div class="article-body">
+          <h4>IELTS vs PTE: Which Test Should Bangladeshi Students Take?</h4>
+          <p>Cost, difficulty, acceptance rates, and preparation time — a side-by-side comparison to help you pick the right English proficiency test.</p>
+          <div class="article-meta">
+            <span>📅 Dec 2025</span>
+            <span>⏱ 5 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Guides -->
+<section class="section guides-section" id="guides">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Quick Access</div>
+      <h2>Downloadable Guides & Tools</h2>
+    </div>
+    <div class="guides-grid stagger-children">
+      <div class="guide-card reveal">
+        <span class="guide-icon">📋</span>
+        <h4>Document Checklist</h4>
+        <p>Complete list of documents needed for university applications across 11 countries.</p>
+      </div>
+      <div class="guide-card reveal">
+        <span class="guide-icon">💰</span>
+        <h4>Budget Calculator</h4>
+        <p>Estimate total cost — tuition, living, travel, insurance — for any destination.</p>
+      </div>
+      <div class="guide-card reveal">
+        <span class="guide-icon">📅</span>
+        <h4>Application Timeline</h4>
+        <p>Month-by-month roadmap from first consultation to departure.</p>
+      </div>
+      <div class="guide-card reveal">
+        <span class="guide-icon">🛂</span>
+        <h4>Visa Requirements</h4>
+        <p>Country-by-country visa criteria, financial proof, and interview tips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+  <div class="newsletter-box reveal">
+    <h2>Get Study Abroad Tips in Your Inbox</h2>
+    <p>Join thousands of subscribers. Weekly guides, scholarship alerts, and visa updates — no spam, unsubscribe anytime.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit" class="btn-primary">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box reveal">
+    <h3>Still Have Questions?</h3>
+    <p>Our counsellors are available for free 1-on-1 sessions. Get personalized advice for your specific situation.</p>
+    <a href="contact.html" class="btn-primary">Book a FREE Consultation</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-main">
+  <div class="footer-grid">
+    <div class="footer-brand reveal">
+      <a href="index.html" class="logo">
+        <img src="images/europeanbdlogo.png" alt="European International" style="height: 45px;">
+      </a>
+      <p>Since 2006, European International has been guiding students toward a better life abroad through expert higher education consultancy and end-to-end support.</p>
+      <div class="social-links">
+        <a href="#"><span>f</span></a>
+        <a href="#"><span>📷</span></a>
+        <a href="#"><span>in</span></a>
+        <a href="#"><span>▶</span></a>
+      </div>
+    </div>
+    <div class="footer-col reveal">
+      <h4>Student Services</h4>
+      <ul>
+        <li><a href="services.html">Admission Support</a></li>
+        <li><a href="services.html">Visa Services</a></li>
+        <li><a href="services.html">Health Insurance</a></li>
+        <li><a href="services.html">Student Accommodation</a></li>
+      </ul>
+      <h4 style="margin-top:28px;">Scholarships</h4>
+      <ul>
+        <li><a href="scholarships.html">Australia Scholarships</a></li>
+        <li><a href="scholarships.html">UK Scholarships</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal">
+      <h4>Study Destinations</h4>
+      <ul>
+        <li><a href="destinations.html">Australia</a></li>
+        <li><a href="destinations.html">UK</a></li>
+        <li><a href="destinations.html">Canada</a></li>
+        <li><a href="destinations.html">Malaysia</a></li>
+        <li><a href="destinations.html">USA</a></li>
+        <li><a href="destinations.html">Japan</a></li>
+        <li><a href="destinations.html">Europe</a></li>
+        <li><a href="destinations.html">Dubai</a></li>
+        <li><a href="destinations.html">New Zealand</a></li>
+        <li><a href="destinations.html">Ireland</a></li>
+        <li><a href="destinations.html">Indonesia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal">
+      <h4>Courses</h4>
+      <ul>
+        <li><a href="#">Nursing</a></li>
+        <li><a href="#">Accounting</a></li>
+        <li><a href="#">Engineering</a></li>
+        <li><a href="#">Business Studies</a></li>
+        <li><a href="#">Food & Hospitality</a></li>
+      </ul>
+      <h4 style="margin-top:28px;">Resources</h4>
+      <ul>
+        <li><a href="resources.html">Blogs</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal">
+      <h4>About European International</h4>
+      <ul>
+        <li><a href="about.html">About European International Bangladesh</a></li>
+        <li><a href="about.html#team">Our Leadership</a></li>
+        <li><a href="about.html#awards">Awards & Achievements</a></li>
+        <li><a href="about.html#testimonials">Testimonials</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- Bottom Bar -->
+<div class="bottom-bar">
+  <p><a href="#">Bangladesh</a> | <a href="#">Australia</a> | <a href="#">Sri Lanka</a> | <a href="#">India</a></p>
+  <p style="margin-top:10px;">Copyright © 2026 European International. | <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a></p>
+</div>
+
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script>
+/* ─── SCROLL PROGRESS ─── */
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  scrollProgress.style.width = (window.scrollY / docHeight * 100) + '%';
+});
+
+/* ─── HEADER SCROLL ─── */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+
+/* ─── HERO PARALLAX ─── */
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => { heroBg.style.transform = `translateY(${window.scrollY * 0.4}px) scale(1.1)`; });
+
+/* ─── SCROLL REVEAL ─── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+}, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+/* ─── FALLBACK ─── */
+setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.visible), .reveal-scale:not(.visible)').forEach(el => {
+    el.classList.add('visible');
+  });
+}, 2000);
+
+/* ─── FILTER ARTICLES ─── */
+function filterArticles(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  let visibleCount = 0;
+  document.querySelectorAll('.article-card').forEach(card => {
+    if (filter === 'all') {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      const cat = card.dataset.category || '';
+      const visible = cat === filter;
+      card.classList.toggle('hidden', !visible);
+      if (visible) visibleCount++;
+    }
+  });
+  document.getElementById('emptyState').classList.toggle('show', visibleCount === 0);
+  document.getElementById('articlesGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ─── SCROLL TO TOP ─── */
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => { scrollBtn.classList.toggle('show', window.scrollY > 600); });
+scrollBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+</script>
+</body>
+</html>
